@@ -10,3 +10,15 @@ D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamlC
 D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.dll
 D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.pdb
 D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.csprojAssemblyReference.cache
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\bin\Debug\netstandard2.0\XamApp.deps.json
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\bin\Debug\netstandard2.0\XamApp.dll
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\bin\Debug\netstandard2.0\XamApp.pdb
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.csprojAssemblyReference.cache
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.csproj.CoreCompileInputs.cache
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.AssemblyInfoInputs.cache
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.AssemblyInfo.cs
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.dll
+C:\Users\Jan\Documents\GitHub\xalendar\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.pdb

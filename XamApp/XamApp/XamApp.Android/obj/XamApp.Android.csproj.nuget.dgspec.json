@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp.Android\\XamApp.Android.csproj": {}
+    "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp.Android\\XamApp.Android.csproj": {}
   },
   "projects": {
-    "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp.Android\\XamApp.Android.csproj": {
+    "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp.Android\\XamApp.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp.Android\\XamApp.Android.csproj",
+        "projectUniqueName": "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp.Android\\XamApp.Android.csproj",
         "projectName": "XamApp.Android",
-        "projectPath": "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp.Android\\XamApp.Android.csproj",
+        "projectPath": "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp.Android\\XamApp.Android.csproj",
         "packagesPath": "C:\\Users\\Jan\\.nuget\\packages\\",
-        "outputPath": "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp.Android\\obj\\",
+        "outputPath": "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
@@ -32,8 +32,8 @@
         "frameworks": {
           "monoandroid81": {
             "projectReferences": {
-              "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp\\XamApp.csproj": {
-                "projectPath": "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp\\XamApp.csproj"
+              "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp\\XamApp.csproj": {
+                "projectPath": "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp\\XamApp.csproj"
               }
             }
           }
@@ -82,14 +82,14 @@
         }
       }
     },
-    "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp\\XamApp.csproj": {
+    "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp\\XamApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp\\XamApp.csproj",
+        "projectUniqueName": "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp\\XamApp.csproj",
         "projectName": "XamApp",
-        "projectPath": "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp\\XamApp.csproj",
+        "projectPath": "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp\\XamApp.csproj",
         "packagesPath": "C:\\Users\\Jan\\.nuget\\packages\\",
-        "outputPath": "D:\\Programmieren\\Mobile Apps\\XamApp\\XamApp\\XamApp\\obj\\",
+        "outputPath": "C:\\Users\\Jan\\Documents\\GitHub\\xalendar\\XamApp\\XamApp\\XamApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\ProgramData\\Xamarin\\NuGet\\",
