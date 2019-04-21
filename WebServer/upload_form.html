@@ -1,0 +1,380 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+			#drop_zone {
+				background-color: #EEE; 
+				border: #999 5px dashed;
+				max-width: 500px;width: 50%;
+				height: 200px;
+				padding: 8px;
+				font-size: 18px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				margin: auto;
+			}
+			
+			#drop_tag {
+				pointer-events: none;
+				width: 70%;
+				text-align: center;
+			}
+	
+			#progress_bar{
+				max-width: 500px;
+				width: 50%;
+				margin: 1em;
+			}
+			
+			i {
+				border: solid rgba(0,90,0,0.3);
+				border-width: 0 30px 30px 0;
+				display: inline-block;
+				padding: 30px;
+				position: absolute;
+			}
+	
+			.up {
+				transform: rotate(-135deg) translate(-10px, -10px);
+				-webkit-transform: rotate(-135deg) translate(-10px, -10px);
+			}
+	
+			.container {
+				display: inline-block;
+				 position: relative;
+				padding-left: 35px;
+				margin-bottom: 12px;
+				cursor: pointer;
+				font-size: 22px;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				width: 45%;
+				min-width: 300px;
+				font-size: 1em;
+			}
+			
+			.container input {
+				position: absolute;
+				opacity: 0;
+				cursor: pointer;
+			}
+			
+			.checkmark {
+				position: absolute;
+				top: 5px;
+				left: 0;
+				height: 25px;
+				width: 25px;
+				background-color: #eee;
+				border-radius: 50%;
+			}
+			
+			.container:hover input ~ .checkmark {
+				background-color: #ccc;
+			}
+			
+			.container input:checked ~ .checkmark {
+				background-color: rgb(0,120,0);
+			}
+			
+			.checkmark:after {
+				content: "";
+				position: absolute;
+				display: none;
+			}
+			
+			.container input:checked ~ .checkmark:after {
+				display: block;
+			}
+			
+			.container .checkmark:after {
+				top: 9px;
+				left: 9px;
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: white;
+			}
+			
+			#textfield {
+				display: inline-block;
+			}
+			
+			#textfield_wrapper {
+				margin: 0.5em 0
+			}
+			
+			.mushroom-info{
+				font-style: italic;
+				font-size: 0.8em;
+				margin: 0;
+			}
+		</style>
+		<script>
+			var file;
+	
+	
+			function drag_drop(event) {
+				event.preventDefault();
+				file = event.dataTransfer.files[0];
+				_("drop_txt").innerHTML = file.name+"\n"+file.size+" bytes \n"+file.type;
+			}
+	
+			function uploadFile(){
+				var art = document.querySelector('input[name="pilzart"]:checked').value;
+				var newArt = _("textfield").value;
+				if (art == "21" && newArt == "") {
+					_("drop_txt").innerHTML = "Bitte Namen der neuen Art angeben.";
+					return;
+				}
+				var confirmString = "";
+				if (art == "21") {
+					confirmString = newArt;
+				} else {
+					confirmString = getPilzArt(art);
+				}
+				
+				if (file == null) {
+					_("drop_txt").innerHTML = "Bitte zuerst Foto hier hinziehen, dann hochladen.";
+					return;
+				}
+				
+				if (file.size > 5000000) {
+					_("drop_txt").innerHTML = "Bitte nur Fotos kleiner als 5MB hochladen.";
+					return;
+				}
+				
+				if (!hasExtension(file, [".jpg", ".jpeg", ".bmp", ".png"])) {
+					_("drop_txt").innerHTML = "Bitte nur Fotos im JPG, JPEG, BMP oder PNG Format hochladen.";
+					return;
+				}
+				
+				function hasExtension(inputID, exts) {
+					var fileName = inputID.name;
+					return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
+				}
+				
+				if (confirm(file.name + " als " + confirmString + " hochladen?")) {
+					var formdata = new FormData();
+					formdata.append("file1", file);
+					formdata.append("art_string", confirmString);
+					formdata.append("art_id", art);
+					var ajax = new XMLHttpRequest();
+					ajax.upload.addEventListener("progress", progressHandler, false);
+					ajax.addEventListener("load", completeHandler, false);
+					ajax.addEventListener("error", errorHandler, false);
+					ajax.addEventListener("abort", abortHandler, false);
+					ajax.open("POST", "/custom_files/file_upload_parser.php");
+					ajax.send(formdata);
+				}
+		
+			}
+	
+			function progressHandler(event){
+				var percent = (event.loaded / event.total) * 100;
+				_("drop_txt").innerHTML = Math.round(percent)+"% hochgeladen...";
+				_("progress_bar").value = Math.round(percent);
+			}
+			function completeHandler(event){
+				_("drop_txt").innerHTML = event.target.responseText;
+			}
+			function errorHandler(event){
+				_("drop_txt").innerHTML = "Hochladen fehlgeschlagen";
+			}
+			function abortHandler(event){
+				_("drop_txt").innerHTML = "Hochladen abgebrochen";
+			}
+			function _(el){
+				return document.getElementById(el);
+			}
+			
+			function getPilzArt(str) {
+				switch (str) {
+					case "1":
+						return "Echter Pfifferling";
+					case "2":
+						return "Fichten-Reizker";
+					case "3":
+						return "Fichten-Steinpilz";
+					case "4":
+						return "Flaschen-Stäubling";
+					case "5":
+						return "Fliegenpilz";
+					case "6":
+						return "Frauen-Taubling";
+					case "7":
+						return "Gemeines Stockschwämmchen";
+					case "8":
+						return "Grüner Knollenblätterpilz";
+					case "9":
+						return "Herbsttrompete";
+					case "10":
+						return "Körnchen-Röhrling";
+					case "11":
+						return "Maronen-Röhling";
+					case "12":
+						return "Nebelkappe";
+					case "13":
+						return "Perlpilz";
+					case "14":
+						return "Riesenschrimpilz";
+					case "15":
+						return "Rötlicher Gallerttrichter";
+					case "16":
+						return "Rotfuss-Röhrling";
+					case "17":
+						return "Schopf-Tintling";
+					case "18":
+						return "Schwefel-Porling";
+					case "19":
+						return "Spitz-Morchel";
+					case "20":
+						return "Wiesen-Egerling";
+					default:
+						return str;
+				}
+			}
+		</script>
+	</head>
+	
+	<body>
+<h2><a href="http://www.obermeier.ch/shroomnet/" class="click-me cm">zurück</a></h2>
+		<h2>Schritt 1: Foto auswählen</h2>
+		<p>Ziehen Sie ein Foto einzeln in den untenstehenden Rahmen um diese für das Hochladen bereitzustellen. Bitte beachten Sie, dass nur Bilder im JPEG-, JPG-, PNG- und BMP-Format hochgeladen werden können, welche nicht grösser als 5MB sind.</p>
+		<div id="drop_zone" ondrop="drag_drop(event)" ondragover="return false">
+			<i class="arrow up"></i>
+			<span id="drop_tag">
+				<p id="drop_txt">Foto hierher ziehen für Upload</p>
+			</span>
+		</div>
+		<div style="justify-content: center;display: flex;">
+			<progress id="progress_bar" value="0" max="100"></progress>
+		</div>
+		
+		<h2>Schritt 2: Art auswählen</h2>
+		<p>Klicken Sie die passende Pilzart an. Falls Sie eine hier nicht aufgeführte Art hochladen wollen, können Sie zuunterst die "andere Pilzart" anwählen und diese mit dem deutschen Namen benennen.</p>
+		<form id="upload_form" enctype="multipart/form-data" method="post">
+			
+			<label class="container">Echter Pfifferling / Eierschwamm
+				<input type="radio" name="pilzart" checked="checked" value="1">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Cantharellus cibarius</p>
+			</label>
+			
+			<label class="container">Fichten-Reizker 
+				<input type="radio" name="pilzart" value="2">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Lactarius deterrimus</p>
+			</label>
+			
+			<label class="container">Fichten-Steinpilz 
+				<input type="radio" name="pilzart" value="3">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Boletus edulis</p>
+			</label>
+			<label class="container">Flaschen-Stäubling 
+				<input type="radio" name="pilzart" value="4">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Lycoperdon perlatum</p>
+			</label>
+			
+			<label class="container">Fliegenpilz 
+				<input type="radio" name="pilzart" value="5">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Amanita muscaria</p>
+			</label>
+			<label class="container">Frauen-Taubling 
+				<input type="radio" name="pilzart" value="6">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Russula cyanoxantha</p>
+			</label>
+			<label class="container">Gemeines Stockschwämmchen 
+				<input type="radio" name="pilzart" value="7">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Kuehneromyces mutabilis</p>
+			</label>
+			<label class="container">Grüner Knollenblätterpilz 
+				<input type="radio" name="pilzart" value="8">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Amanita phalloides</p>
+			</label>
+			<label class="container">Herbsttrompete / Totentrompete
+				<input type="radio" name="pilzart" value="9">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Carterellus cornucopioides</p>
+			</label>
+			<label class="container">Körnchen-Röhrling 
+				<input type="radio" name="pilzart" value="10">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Suillus granulatus</p>
+			</label>
+			<label class="container">Maronen-Röhling 
+				<input type="radio" name="pilzart" value="11">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Xerocomus badius</p>
+			</label>
+			<label class="container">Nebelkappe / Nebelgrauer Trichterling
+				<input type="radio" name="pilzart" value="12">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Clitocybe nebularis</p>
+			</label>
+			<label class="container">Perlpilz 
+				<input type="radio" name="pilzart" value="13">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Amanita rubescens</p>
+			</label>
+			<label class="container">Riesenschrimpilz / Parasolpilz
+				<input type="radio" name="pilzart" value="14">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Macrolepiota procera</p>
+			</label>
+			<label class="container">Rötlicher Gallerttrichter 
+				<input type="radio" name="pilzart" value="15">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Tremiscus helvelloides</p>
+			</label>
+			<label class="container">Rotfuss-Röhrling 
+				<input type="radio" name="pilzart" value="16">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Xerocomus chrysenteron</p>
+			</label>
+			<label class="container">Schopf-Tintling 
+				<input type="radio" name="pilzart" value="17">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Coprinus comatus</p>
+			</label>
+			<label class="container">Schwefel-Porling 
+				<input type="radio" name="pilzart" value="18">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Laetiporus sulphureus</p>
+			</label>
+			<label class="container">Spitz-Morchel 
+				<input type="radio" name="pilzart" value="19">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Morchella conica</p>
+			</label>
+			<label class="container">Wiesen-Egerling / Wiesen-Champignon
+				<input type="radio" name="pilzart" value="20">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Agaricus campestris</p>
+			</label>
+			<label class="container" style="width: 100px;">andere Pilzart
+				<input type="radio" name="pilzart" value="21">
+				<span class="checkmark"></span>
+			</label>
+			<div id="textfield_wrapper">
+				<p>deutscher Name: <input id="textfield" type="text" name="newname"></p>
+			</div>
+			
+			<h2>Schritt 3: Hochladen</h2>
+			<p>Wenn Sie oben alles ausgefüllt haben, können sie mit einem Kilck unten das Hochladen starten. Sollte alles funktionieren, wird nochmals ein Bestätigungsfenster aufgehen, worauf das Foto hochgeladen wird. Status wird im Feld oben angezeigt.</p>
+			<input type="button" id="start_upload" value="Hochladen" 
+				   onclick="uploadFile()" style="display: block">
+		</form>
+	</body>
+</html>

@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+			#drop_zone {
+				background-color: #EEE; 
+				border: #999 5px dashed;
+				max-width: 500px;width: 50%;
+				height: 200px;
+				padding: 8px;
+				font-size: 18px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				margin: auto;
+			}
+			
+			#drop_tag {
+				pointer-events: none;
+				width: 70%;
+				text-align: center;
+			}
+	
+			#progress_bar{
+				max-width: 500px;
+				width: 50%;
+				margin: 1em;
+			}
+			
+			i {
+				border: solid rgba(0,90,0,0.3);
+				border-width: 0 30px 30px 0;
+				display: inline-block;
+				padding: 30px;
+				position: absolute;
+			}
+	
+			.up {
+				transform: rotate(-135deg) translate(-10px, -10px);
+				-webkit-transform: rotate(-135deg) translate(-10px, -10px);
+			}
+
+		</style>
+		<script>
+			var files;
+			
+			function drag_drop(event) {
+				event.preventDefault();
+				files = event.dataTransfer.files;
+				if (files.length == 1) {
+					_("drop_txt").innerHTML = files[0].name + " ausgewählt";
+				} else {
+					_("drop_txt").innerHTML = files.length + " Dateien ausgewählt";
+				}
+			}
+			
+			function _(el){
+				return document.getElementById(el);
+			}
+						
+		</script>
+	</head>
+	
+	<body>
+		<h2><a href="http://www.obermeier.ch/shroomnet/" class="click-me cm">zurück</a></h2>
+		<h2>Schritt 1: Foto auswählen</h2>
+		<p>Ziehen Sie ein Foto einzeln in den untenstehenden Rahmen um diese für das Hochladen bereitzustellen. Bitte beachten Sie, dass nur Bilder im JPEG-, JPG-, PNG- und BMP-Format hochgeladen werden können, welche nicht grösser als 5MB sind.</p>
+		<div id="drop_zone" ondrop="drag_drop(event)" ondragover="return false">
+			<i class="arrow up"></i>
+			<span id="drop_tag">
+				<p id="drop_txt">Foto hierher ziehen für Upload</p>
+			</span>
+		</div>
+		
+	</body>
+</html>

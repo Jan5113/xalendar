@@ -1,0 +1,290 @@
+﻿﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+	
+			.container {
+				display: inline-block;
+				 position: relative;
+				padding-left: 35px;
+				margin-bottom: 12px;
+				cursor: pointer;
+				font-size: 22px;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				width: 45%;
+				min-width: 300px;
+				font-size: 1em;
+			}
+			
+			.container input {
+				position: absolute;
+				opacity: 0;
+				cursor: pointer;
+			}
+			
+			.checkmark {
+				position: absolute;
+				top: 5px;
+				left: 0;
+				height: 25px;
+				width: 25px;
+				background-color: #eee;
+				border-radius: 50%;
+			}
+			
+			.container:hover input ~ .checkmark {
+				background-color: #ccc;
+			}
+			
+			.container input:checked ~ .checkmark {
+				background-color: rgb(0,120,0);
+			}
+			
+			.checkmark:after {
+				content: "";
+				position: absolute;
+				display: none;
+			}
+			
+			.container input:checked ~ .checkmark:after {
+				display: block;
+			}
+			
+			.container .checkmark:after {
+				top: 9px;
+				left: 9px;
+				width: 8px;
+				height: 8px;
+				border-radius: 50%;
+				background: white;
+			}
+			
+			.mushroom-info{
+				font-style: italic;
+				font-size: 0.8em;
+				margin: 0;
+			}
+			
+			.btn {
+				
+			}
+			
+		</style>
+		<script>
+			var imgPath;
+			
+			function setShroomImg() {
+				var ajax = new XMLHttpRequest();
+				ajax.open("GET", "/custom_files/dbGet.php", true);
+				ajax.send();
+				ajax.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						imgPath = this.responseText;
+						document.getElementById("shroom_img").src = "/custom_files/shroomnet_uploads/" + imgPath;
+					}
+				};
+			}
+			
+			function confirmVote() {
+				var art = document.querySelector('input[name="pilzart"]:checked').value;
+				
+				if (confirm("Sicher, dass es ein Pilz der Art "+ getPilzArt(art)+" ist?")) {
+					var formdata = new FormData();
+					formdata.append("img_path", imgPath);
+					formdata.append("art_id", "img_art"+art);
+					var ajax = new XMLHttpRequest();
+					ajax.open("POST", "/custom_files/dbSet.php", true);
+					ajax.send(formdata);
+					ajax.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							setShroomImg();
+						}
+					};
+				}
+				
+			}
+			
+			function skipVote() {
+				setShroomImg();
+			}
+			
+			function getPilzArt(str) {
+				switch (str) {
+					case "01":
+						return "Echter Pfifferling";
+					case "02":
+						return "Fichten-Reizker";
+					case "03":
+						return "Fichten-Steinpilz";
+					case "04":
+						return "Flaschen-Stäubling";
+					case "05":
+						return "Fliegenpilz";
+					case "06":
+						return "Frauen-Taubling";
+					case "07":
+						return "Gemeines Stockschwämmchen";
+					case "08":
+						return "Grüner Knollenblätterpilz";
+					case "09":
+						return "Herbsttrompete";
+					case "10":
+						return "Körnchen-Röhrling";
+					case "11":
+						return "Maronen-Röhling";
+					case "12":
+						return "Nebelkappe";
+					case "13":
+						return "Perlpilz";
+					case "14":
+						return "Riesenschrimpilz";
+					case "15":
+						return "Rötlicher Gallerttrichter";
+					case "16":
+						return "Rotfuss-Röhrling";
+					case "17":
+						return "Schopf-Tintling";
+					case "18":
+						return "Hallimasch";
+					case "19":
+						return "Spitz-Morchel";
+					case "20":
+						return "Wiesen-Egerling";
+					default:
+						return str;
+				}
+			}
+			
+		</script>
+	</head>
+	
+	<body>
+		<h2><a href="http://www.obermeier.ch/shroomnet/" class="click-me cm">zurück</a></h2>
+		<div class="image_wrapper">
+			<img id="shroom_img" alt="Bild konnte nicht geladen werden.">
+		</div> 
+		<script>
+			setShroomImg();
+		</script>
+		
+		<form id="upload_form" enctype="multipart/form-data" method="post">
+			
+			<label class="container">Echter Pfifferling / Eierschwamm
+				<input type="radio" name="pilzart" checked="checked" value="01">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Cantharellus cibarius</p>
+			</label>
+			
+			<label class="container">Fichten-Reizker 
+				<input type="radio" name="pilzart" value="02">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Lactarius deterrimus</p>
+			</label>
+			
+			<label class="container">Fichten-Steinpilz 
+				<input type="radio" name="pilzart" value="03">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Boletus edulis</p>
+			</label>
+			<label class="container">Flaschen-Stäubling 
+				<input type="radio" name="pilzart" value="04">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Lycoperdon perlatum</p>
+			</label>
+			
+			<label class="container">Fliegenpilz 
+				<input type="radio" name="pilzart" value="05">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Amanita muscaria</p>
+			</label>
+			<label class="container">Frauen-Taubling 
+				<input type="radio" name="pilzart" value="06">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Russula cyanoxantha</p>
+			</label>
+			<label class="container">Gemeines Stockschwämmchen 
+				<input type="radio" name="pilzart" value="07">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Kuehneromyces mutabilis</p>
+			</label>
+			<label class="container">Grüner Knollenblätterpilz 
+				<input type="radio" name="pilzart" value="08">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Amanita phalloides</p>
+			</label>
+			<label class="container">Herbsttrompete / Totentrompete
+				<input type="radio" name="pilzart" value="09">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Carterellus cornucopioides</p>
+			</label>
+			<label class="container">Körnchen-Röhrling 
+				<input type="radio" name="pilzart" value="10">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Suillus granulatus</p>
+			</label>
+			<label class="container">Maronen-Röhling 
+				<input type="radio" name="pilzart" value="11">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Xerocomus badius</p>
+			</label>
+			<label class="container">Nebelkappe / Nebelgrauer Trichterling
+				<input type="radio" name="pilzart" value="12">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Clitocybe nebularis</p>
+			</label>
+			<label class="container">Perlpilz 
+				<input type="radio" name="pilzart" value="13">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Amanita rubescens</p>
+			</label>
+			<label class="container">Riesenschrimpilz / Parasolpilz
+				<input type="radio" name="pilzart" value="14">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Macrolepiota procera</p>
+			</label>
+			<label class="container">Rötlicher Gallerttrichter 
+				<input type="radio" name="pilzart" value="15">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Tremiscus helvelloides</p>
+			</label>
+			<label class="container">Rotfuss-Röhrling 
+				<input type="radio" name="pilzart" value="16">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Xerocomus chrysenteron</p>
+			</label>
+			<label class="container">Schopf-Tintling 
+				<input type="radio" name="pilzart" value="17">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Coprinus comatus</p>
+			</label>
+			<label class="container">Hallimasch 
+				<input type="radio" name="pilzart" value="18">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Armillaria ostoyae
+</p>
+			</label>
+			<label class="container">Spitz-Morchel 
+				<input type="radio" name="pilzart" value="19">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Morchella conica</p>
+			</label>
+			<label class="container">Wiesen-Egerling / Wiesen-Champignon
+				<input type="radio" name="pilzart" value="20">
+				<span class="checkmark"></span>
+				<p class="mushroom-info">Agaricus campestris</p>
+			</label>
+			<label class="container" style="width: 100px;">andere Pilzart
+				<input type="radio" name="pilzart" value="21">
+				<span class="checkmark"></span>
+			</label>
+			<input type="button" id="confirm" class="btn" value="Bestätigen" 
+				   onclick="confirmVote()">
+			<input type="button" id="skip" class="btn" value="Überspringen" 
+				   onclick="skipVote()">
+		</form>
+	</body>
+</html>
