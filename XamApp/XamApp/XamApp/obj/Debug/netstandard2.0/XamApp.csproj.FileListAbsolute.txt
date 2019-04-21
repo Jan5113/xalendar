@@ -1,0 +1,12 @@
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\bin\Debug\netstandard2.0\XamApp.deps.json
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\bin\Debug\netstandard2.0\XamApp.dll
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\bin\Debug\netstandard2.0\XamApp.pdb
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.csproj.CoreCompileInputs.cache
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.AssemblyInfoInputs.cache
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.AssemblyInfo.cs
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamlC.stamp
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.dll
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.pdb
+D:\Programmieren\Mobile Apps\XamApp\XamApp\XamApp\obj\Debug\netstandard2.0\XamApp.csprojAssemblyReference.cache
